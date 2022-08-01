@@ -21,4 +21,4 @@ if (!process.env.TWITTER_BEARER_TOKEN)
 const twitterClient = new Client(process.env.TWITTER_BEARER_TOKEN);
 
 app.use(router);
-app.listen(PORT, () => console.log(`Server listenig on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
