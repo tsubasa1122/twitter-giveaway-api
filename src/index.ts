@@ -12,8 +12,12 @@ const PORT = 8000;
 
 app.use(express.json());
 
-// TODO: 許可するドメインだけに絞る
-app.use(cors());
+const corsOptions = {
+  origin: process.env.BASE_URL,
+  method: "GET",
+};
+
+app.use(cors(corsOptions));
 
 router.get("/hc", (_, res: Response) => res.send("ok"));
 
