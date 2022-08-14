@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Tweet {
+model Tweets {
   id        String   @id @default(uuid())
   tweetId   String   @unique
   authorId  String?
