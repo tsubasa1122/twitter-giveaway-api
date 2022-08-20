@@ -1,7 +1,7 @@
 import axios from "axios";
-import { IHttpClient } from "./IHttpClient";
+import { ITwitterHttpClient } from "./ITwitterHttpClient";
 
-export class HttpClient implements IHttpClient {
+export class TwitterHttpClient implements ITwitterHttpClient {
   TWITTER_BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
   BASE_URL = "https://api.twitter.com/1.1/search/tweets";
 
@@ -17,9 +17,8 @@ export class HttpClient implements IHttpClient {
     headers: this.defaultHeaderOptions,
   });
 
-  // TODO: paramsの型をちゃんと定義する
-  get = async <T>(path: string, params: any): Promise<T> => {
-    const response = await this.axios.get(path, { params: params });
+  get = async <T>(path: string, query: string): Promise<T> => {
+    const response = await this.axios.get(path, { params: { q: query } });
     return response.data;
   };
 }
