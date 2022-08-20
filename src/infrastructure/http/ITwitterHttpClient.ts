@@ -1,3 +1,5 @@
+import { TwitterQueryParams } from "./twitterHttpClient";
+
 export type ITwitterHttpClient = {
-  get<T>(path: string, query: string): Promise<T>;
+  get<T>(path: string, query: TwitterQueryParams): Promise<T>;
 };
