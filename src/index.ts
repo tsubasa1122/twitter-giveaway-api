@@ -2,8 +2,8 @@ import express, { Response } from "express";
 import Router from "express-promise-router";
 import dotenv from "dotenv";
 import cors from "cors";
-import Client from "twitter-api-sdk";
 import TwitterRepository from "./repositories/twitter";
+import { TwitterHttpClient } from "./infrastructure/http/twitterHttpClient";
 
 dotenv.config();
 const app = express();
@@ -21,11 +21,8 @@ app.use(cors(corsOptions));
 
 router.get("/hc", (_, res: Response) => res.send("ok"));
 
-if (!process.env.TWITTER_BEARER_TOKEN)
-  throw new Error("ツイッターのtokenが設定されていません。");
-const twitterClient = new Client(process.env.TWITTER_BEARER_TOKEN);
-
 router.get("/", async (_, res: Response) => {
+  const twitterClient = new TwitterHttpClient();
   const twitterRepository = new TwitterRepository(twitterClient);
   const tweets = await twitterRepository.searchTweets("#giveaway");
   res.status(200).json(tweets);
